@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monopoly</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        #anamasa {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            height: 500px;
+            width: 500px;
+            left: 50%;
+            top: 50%;
+            background-color: #48C9B0;
+            border-radius: 10px;
+            border: 3px solid black;
+        }
+        #ayrac {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            width: 350px;
+            height: 350px;
+            border: 3px solid black;
+            background-color: #fff;
+            z-index: 2;
+        }
+        #cubuk {
+            position: absolute;
+            transform: translatX(-50%);
+            width: 3px;
+            height: 100%;
+            background-color: black;
+            z-index: -1;
+        }
+        #yancubuk {
+            position: absolute;
+            transform: translatX(-50%);
+            width: 100%;
+            height: 3px;
+            background-color: black;
+            z-index: -1;
+        }
+        #basla {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            bottom: 0px;
+            left: 35px;
+            border: solid black;
+            padding: 5px;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .karakter {
+            width: 75px;
+            height: 75px;
+            position: absolute;
+        }
+        .karakter img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        #k1 {
+            left: 0px;
+            bottom: 0px;
+        }
+        #k2 {
+            left: 0px;
+            bottom: 0px;
+        }
+        #k3 {
+            left: 0px;
+            bottom: 0px;
+        }
+        #k4 {
+            left: 0px;
+            bottom: 0px;
+        }
+        #butonbir {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            z-index: 3;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 1s;
+        }
+        #butonbir:hover {
+            background-color: blue;
+            color: white;
+        }
+        #bos {
+            width: 0vh;
+            height: 100vh;
+        }
+        #bos {
+            width: 100%;
+            height: 100vh;
+        }
+        .oyuncuarayuz {
+            position: absolute;
+            width: 400px;
+            height: 200px;
+        }
+        #biryuz {
+            background-color: #1BE7FF;
+            top: 0;
+            left: 0;
+            border-bottom-right-radius: 20px;
+        }
+        #ikiyuz {
+            background-color: #6EEB83;
+            bottom: 0;
+            left: 0;
+            border-top-right-radius: 20px;
+        }
+        #ucyuz {
+            background-color: #FFB800;
+            top: 0;
+            right: 0;
+            border-bottom-left-radius: 20px;
+        }
+        #dortyuz {
+            background-color: #FF5714;
+            bottom: 0;
+            right: 0;
+            border-top-left-radius: 20px;
+        }
+        .o {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: large;
+        }
+        .money {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            font-size: large;
+        }
+        .mekan {
+            position: absolute;
+            transform: translateY(-50%);
+            text-align: left;
+        }
+        .mekan p:not(.maliyet) {
+            background-color: black;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .mekan .maliyet {
+            background-color: #42f542;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+                        <!-- Oyuncu arayuzleri -->
+                        <div class="oyuncuarayuz" id="biryuz">
+                            <p class="o">Oyuncu 1</p>
+                            <p class="money">Para: 2000000 TL</p>
+                        </div>
+                        <div class="oyuncuarayuz" id="ucyuz">
+                            <p class="o">Oyuncu 3</p>
+                            <p class="money">Para: 2000000 TL</p>
+                        </div>
+                        <div class="oyuncuarayuz" id="ikiyuz">
+                            <p class="o">Oyuncu 2</p>
+                            <p class="money">Para: 2000000 TL</p>
+                        </div>
+                        <div class="oyuncuarayuz" id="dortyuz">
+                            <p class="o">Oyuncu 4</p>
+                            <p class="money">Para: 2000000 TL</p>
+                        </div>
+                        <img src="https://cdn.discordapp.com/attachments/888480703010979840/984182187811274762/unknown.png" alt="" id="bos">
+    <div id="anamasa">
+        <div id="cubuk" style="left: 70px;"></div>
+        <div id="cubuk" style="left: 140px;"></div>
+        <div id="cubuk" style="left: 210px;"></div>
+        <div id="cubuk" style="left: 280px;"></div>
+        <div id="cubuk" style="left: 350px;"></div>
+        <div id="cubuk" style="left: 420px;"></div>
+
+        <div id="yancubuk" style="top: 70px;"></div>
+        <div id="yancubuk" style="top: 140px;"></div>
+        <div id="yancubuk" style="top: 210px;"></div>
+        <div id="yancubuk" style="top: 280px;"></div>
+        <div id="yancubuk" style="top: 350px;"></div>
+        <div id="yancubuk" style="top: 420px;"></div>
+
+
+
+
+        <div id="yerler">
+        <div id="yer" class="mekan"><p>İzmir</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>İstanbul</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Hatay</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Gaziantep</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Rize</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Kilis</p><p class="maliyet">Para</p></div>
+
+        <div id="yer" class="mekan"><p>Adana</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Ankara</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Konya</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Sivas</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Aksaray</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Isparta</p><p class="maliyet">Para</p></div>
+
+        <div id="yer" class="mekan"><p>Kütahya</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Uşak</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Demasya</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Rüzgar'ın Mekanı</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Karaman</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Batman</p><p class="maliyet">Para</p></div>
+
+        <div id="yer" class="mekan"><p>Bolu</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Yer</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Yer</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Vergi</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Silivri</p><p class="maliyet">Para</p></div>
+        <div id="yer" class="mekan"><p>Yer</p><p class="maliyet">Para</p></div>
+        </div>
+
+        
+
+        <p id="basla">Başla</p>
+        <div id="ayrac"></div>
+        <button type="submit" id="butonbir" onclick="zarat()">Zar at</button>
+                    <!-- karakterler -->
+                    <div id="k1" class="karakter">
+                        <img src="https://cdn.discordapp.com/attachments/888480703010979840/984180107377774662/ezgif.com-gif-maker.gif" alt="">
+                    </div>
+                    <div id="k2" class="karakter">
+                        <img src="https://cdn.discordapp.com/attachments/977539163853316187/985233220310302760/unknown.png" alt="" style="z-index: -3;">
+                    </div>
+                    <div id="k3" class="karakter">
+                        <img src="https://cdn.discordapp.com/attachments/977539163853316187/984543233809989722/luxgif.gif" alt="">
+                    </div>
+                    <div id="k4" class="karakter">
+                        <img src="https://cdn.discordapp.com/attachments/977539163853316187/984543234057469962/teemogif.gif" alt="">
+                    </div>
+    </div>
+    <script>
+        var yerler = document.getElementById("yerler");
+        var sols = 0;
+        var alts = 0;
+        var k = yerler.children;
+        var sy = 0;
+        var a = 0;
+        for(let i=0;i<7;i++)
+        {
+            k[sy].style.bottom = `${a-20}px`;
+            k[sy].style.left = "-80px";
+            sy++;
+            a+=70;
+            
+        }
+        a = 70;
+        for(let i=0;i<5;i++)
+        {
+            k[sy].style.left = `${a+10}px`;
+            k[sy].style.bottom = "490px";
+            sy++;
+            a+=70;
+        }
+        a = 420;
+        for(let i=0;i<7;i++)
+        {
+            if(i==3)
+            {
+                k[sy].style.bottom = `${a-40}px`;
+            }
+            else {
+                k[sy].style.bottom = `${a-20}px`;
+            }
+            k[sy].style.left = "520px";
+            sy++;
+            a-=70;
+        }
+        a = 350;
+        for(let i=0;i<5;i++)
+        {
+            k[sy].style.left = `${a+10}px`;
+            k[sy].style.bottom = "-100px";
+            sy++;
+            a-=70;
+        }
+        var karakter1 = document.getElementById("k1");
+        var karakter2 = document.getElementById("k2");
+        var karakter3 = document.getElementById("k3");
+        var karakter4 = document.getElementById("k4");
+        var birinci = {
+            "ad": karakter1,
+            "adim": 0,
+            "para": 2000000,
+            "isaret": 0,
+            "etiket": "biryuz",
+            "mallar": [],
+            "sol": 0,
+            "asagi": 0,
+
+        }
+        var ikinci = {
+            "ad": karakter2,
+            "adim": 0,
+            "para": 2000000,
+            "isaret": 2,
+            "etiket": "ikiyuz",
+            "mallar": [],
+            "sol": 0,
+            "asagi": 0,
+        }
+        var ucuncu = {
+            "ad": karakter3,
+            "adim": 0,
+            "para": 2000000,
+            "isaret": 1,
+            "etiket": "ucyuz",
+            "mallar": [],
+            "sol": 0,
+            "asagi": 0,
+        }
+        var dorduncu = {
+            "ad": karakter4,
+            "adim": 0,
+            "para": 2000000,
+            "isaret": 3,
+            "etiket": "dortyuz",
+            "mallar": [],
+            "sol": 0,
+            "asagi": 0,
+        }
+        var sira = 0;
+        var karakterler = [birinci, ikinci, ucuncu, dorduncu];
+        function zarat() {
+            var sayi = Math.random();
+            sayi = sayi*10;
+            sayi = parseInt(sayi)%6+1;
+            for(s of karakterler)
+            {
+                let deg = document.getElementById(`${s.etiket}`)
+                    deg.style.color = "#fff";
+                    deg.style.boxShadow = "none";
+            }
+            for(c of karakterler)
+            {
+                if(c.isaret==sira%4)
+                {
+                    let deg = document.getElementById(`${c.etiket}`)
+                    deg.style.color = "black";
+                    deg.style.boxShadow = "rgba(0, 0, 0, 0.35) 0px 5px 15px";
+                    for(var i=0;i<sayi;i++)
+                    {
+                        c.adim++;
+                    if(c.asagi<=350&&c.sol==0)
+                    c.ad.style.bottom = `${c.asagi+=70}px`;
+                    else if(c.asagi==420&&c.sol<=350)
+                    c.ad.style.left = `${c.sol+=70}px`;
+                    else if(c.asagi>0&&c.sol==420)
+                    c.ad.style.bottom = `${c.asagi-=70}px`;
+                    else if(c.asagi==0&&c.sol>0)
+                    c.ad.style.left = `${c.sol-=70}px`;
+                    }
+                    if(c.adim>=24)
+                    {
+                        c.adim-=24;
+                        c.para+=300000;
+                        arayuzguncelle();
+                    }
+                }
+            }
+            sira++;
+        }
+        function arayuzguncelle() {
+            for(let i=0;i<4;i++)
+            {
+                let para = karakterler[i].para;
+                document.querySelectorAll(".oyuncuarayuz")[i].children[1].innerHTML = `Para: ${para} TL`;
+            }
+        }
+            </script>
+</body>
+</html>
